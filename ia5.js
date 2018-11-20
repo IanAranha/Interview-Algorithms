@@ -1,29 +1,69 @@
 function Set() {
     // the var collection will hold our set
-    var collection = [];
+    this.collection = [];
     // this method will check for the presence of an element and return true or false
     this.has = function(element) {
-        return (collection.indexOf(element) !== -1);
+        return (this.collection.indexOf(element) !== -1);
     };
     // this method will return all the values in the set
     this.values = function() {
-        return collection;
+        return this.collection;
     };
     // change code below this line
     this.add = function(item){
         if(!this.has(item)){
-            collection.push(item)
-            console.log(collection)
-        } else {
-            console.log(item+ ` already in collection`)
-        }
-        
+            this.collection.push(item)
+            return true
+        } 
+        return false
     }
-    // change code above this line
+    
+    this.remove = function(item){
+        if(this.collection.indexOf(item) < 0){
+            return false
+        } else {
+            this.collection.splice(this.collection.indexOf(item),1)
+            return true
+        }
+    }
+    
+    this.size = function(){
+        return this.collection.length
+    }
+    
+   this.union = function(Set){
+        var newColl = []
+        console.log(Set.collection)
+        for(var i = 0; i<this.collection.length;i++){
+               newColl.push(this.collection[i])
+               }
+        for(var i = 0; i<Set.collection.length;i++){
+            if(this.collection.indexOf(Set.collection[i]) < 0){
+               newColl.push(Set.collection[i])
+            }
+        }
+        return newColl
+   }
 }
 
-var set = new Set()
-set.add(10)
-set.add(20)
-set.add(30)
-set.add(20)
+var setA = new Set()
+setA.add(10)
+setA.add(20)
+setA.add(30)
+setA.add(20)
+setA.add(50)
+//console.log(setA.collection)
+setA.remove(20)
+//console.log(setA.size())
+console.log(setA.collection)
+    
+var setB = new Set()
+setB.add(10)
+setB.add("a")
+setB.add("V")
+setB.add("g")
+setB.add(50)
+console.log(setB.collection)
+//console.log(setB.size())
+console.log()
+console.log(setA.union(setB))
